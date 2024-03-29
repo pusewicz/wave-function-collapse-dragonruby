@@ -6,7 +6,7 @@ require_relative "grid"
 def tick(args)
   if args.state.tick_count == 0
     args.outputs.debug << "Initializing..."
-    args.state.options = RULES.map do |name, edges|
+    args.state.options = Config::RULES.map do |name, edges|
       Tile.new(name, edges)
     end
 
@@ -16,7 +16,7 @@ def tick(args)
 
     args.state.collapsed = false
 
-    args.state.wave = Grid.new(args.grid.w.div(TILE_SIZE), args.grid.h.div(TILE_SIZE), args.state.options)
+    args.state.wave = Grid.new(args.grid.w.div(Config::TILE_SIZE), args.grid.h.div(Config::TILE_SIZE), args.state.options)
     args.state.paused = true
     args.outputs.debug << "Initialized!"
   else
@@ -29,26 +29,26 @@ def tick(args)
       col.each do |cell|
         if cell.name
           args.outputs.sprites << {
-            x: cell.x * TILE_SIZE,
-            y: cell.y * TILE_SIZE,
-            w: TILE_SIZE,
-            h: TILE_SIZE,
-            path: SPRITES[cell.name]
+            x: cell.x * Config::TILE_SIZE,
+            y: cell.y * Config::TILE_SIZE,
+            w: Config::TILE_SIZE,
+            h: Config::TILE_SIZE,
+            path: Config::SPRITES[cell.name]
           }.sprite!
         else
           args.outputs.borders << {
-            x: cell.x * TILE_SIZE,
-            y: cell.y * TILE_SIZE,
-            w: TILE_SIZE,
-            h: TILE_SIZE,
+            x: cell.x * Config::TILE_SIZE,
+            y: cell.y * Config::TILE_SIZE,
+            w: Config::TILE_SIZE,
+            h: Config::TILE_SIZE,
             r: 0,
             g: 128,
             b: 0,
             a: 128
           }
           args.outputs.labels << {
-            x: cell.x * TILE_SIZE + TILE_SIZE.div(2), 
-            y: cell.y * TILE_SIZE + TILE_SIZE.div(2) - 1,
+            x: cell.x * Config::TILE_SIZE + Config::TILE_SIZE.div(2), 
+            y: cell.y * Config::TILE_SIZE + Config::TILE_SIZE.div(2) - 1,
             text: cell.entropy.to_s,
             size_enum: -4,
             alignment_enum: 1,
@@ -59,14 +59,14 @@ def tick(args)
     end
 
     # Add debug label on mouse hover of the cell
-    x = args.inputs.mouse.x.idiv(TILE_SIZE)
-    y = args.inputs.mouse.y.idiv(TILE_SIZE)
+    x = args.inputs.mouse.x.idiv(Config::TILE_SIZE)
+    y = args.inputs.mouse.y.idiv(Config::TILE_SIZE)
     if cell = args.state.wave.grid[x]&.[](y)
       args.outputs.borders << {
-        x: x * TILE_SIZE,
-        y: y * TILE_SIZE,
-        w: TILE_SIZE,
-        h: TILE_SIZE,
+        x: x * Config::TILE_SIZE,
+        y: y * Config::TILE_SIZE,
+        w: Config::TILE_SIZE,
+        h: Config::TILE_SIZE,
         r: 255,
         g: 0,
         b: 0
