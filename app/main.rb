@@ -98,7 +98,7 @@ class Grid
         cell_below = @grid[x][(y - 1).clamp(0, @height - 1)]
         cell.options &= cell_below.options.map(&:up).flatten
 
-        cell_left = @grid[(x - 1).clamp(@height - 1)][y]
+        cell_left = @grid[(x - 1).clamp(0, @height - 1)][y]
         cell.options &= cell_left.options.map(&:right).flatten
       end
     end
