@@ -29,17 +29,19 @@ class Grid
         x = cell.x
         y = cell.y
 
-        cell_above = @grid[x][y.succ.clamp(0, @height - 1)]
-        cell.options &= cell_above.options.map(&:down).flatten
+        x_succ = x.succ
+        y_succ = y.succ
+        x_pred = (x - 1)
+        y_pred = (y - 1)
 
-        cell_right = @grid[x.succ.clamp(0, @width - 1)][y]
-        cell.options &= cell_right.options.map(&:left).flatten
+        next if x_pred.negative? || y_pred.negative? || x_succ >= @width || y_succ >= @height
 
-        cell_below = @grid[x][(y - 1).clamp(0, @height - 1)]
-        cell.options &= cell_below.options.map(&:up).flatten
+        cell_above_options = @grid[x][y_succ].options.map(&:down)
+        cell_right_options = @grid[x_succ][y].options.map(&:left)
+        cell_below_options = @grid[x][y_pred].options.map(&:up)
+        cell_left_options = @grid[x_pred][y].options.map(&:right)
 
-        cell_left = @grid[(x - 1).clamp(0, @width - 1)][y]
-        cell.options &= cell_left.options.map(&:right).flatten
+        cell.options &= cell_above_options.flatten & cell_right_options.flatten & cell_below_options.flatten & cell_left_options.flatten
       end
     end
   end
