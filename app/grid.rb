@@ -24,7 +24,7 @@ class Grid
       cell_above.options &= cell.options.map(&:up).flatten
     end
 
-    if cell_right = cell.neighbors[:right]
+    if (cell_right = cell.neighbors[:right])
       cell.options &= cell_right.options.map(&:left).flatten
       cell_right.options &= cell.options.map(&:right).flatten
     end
@@ -34,10 +34,10 @@ class Grid
       cell_below.options &= cell.options.map(&:down).flatten
     end
 
-    if cell_left = cell.neighbors[:left]
-      cell.options &= cell_left.options.map(&:right).flatten
-      cell_left.options &= cell.options.map(&:left).flatten
-    end
+    return unless (cell_left = cell.neighbors[:left])
+
+    cell.options &= cell_left.options.map(&:right).flatten
+    cell_left.options &= cell.options.map(&:left).flatten
   end
 
   def collapse

@@ -100,9 +100,7 @@ def tick(args)
 
       args.outputs.debug << "Collapsed in #{total_time.to_sf} milliseconds @ #{args.state.iterations} iterations per tick."
 
-      if total_time <= 16.666
-        args.state.iterations += 2
-      end
+      args.state.iterations += 2 if total_time <= 16.666
     end
   end
 end
