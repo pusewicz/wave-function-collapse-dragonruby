@@ -4,7 +4,20 @@ class Cell
   def initialize(x, y, options)
     @x = x
     @y = y
+    @neighbors = nil
     self.options = options
+  end
+
+  def neighbors(grid = nil)
+    return @neighbors if grid.nil?
+
+    @neighbors ||= begin
+      up = grid[@x][@y + 1] if grid[@x] && @y < grid[0].length - 1
+      down = grid[@x][@y - 1] if grid[@x] && @y.positive?
+      right = grid[@x + 1][@y] if @x < grid.length - 1
+      left = grid[@x - 1][@y] if @x.positive?
+      { up: up, down: down, right: right, left: left }
+    end
   end
 
   def name
