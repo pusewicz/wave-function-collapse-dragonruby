@@ -100,8 +100,8 @@ def tick(args)
 
       args.outputs.debug << "Collapsed in #{total_time.to_sf} milliseconds @ #{args.state.iterations} iterations per tick."
 
-      if args.gtk.current_framerate > 30
-        args.state.iterations += 1
+      if total_time <= 16.666
+        args.state.iterations += 2
       end
     end
   end
