@@ -18,7 +18,7 @@ class Config
     :e3 => [0, 1, 0, 0],
     :e4 => [0, 0, 1, 0],
     :cross => [1, 1, 1, 1]
-  }
+  }.freeze
 
   SPRITES = {}.tap do |sprites|
     RULES.keys.map do |name|
