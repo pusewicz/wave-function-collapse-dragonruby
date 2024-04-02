@@ -16,11 +16,11 @@ class Cell
   end
 
   def to_s
-    "Cell #{x}x#{y}, collapsed: #{@collapsed}, entropy: #{entropy}, name: #{name.inspect}"
+    "Cell #{@x}x#{@y} collapsed: #{@collapsed}, entropy: #{@entropy}, name: #{@name}"
   end
 
   def options=(options)
-    raise ArgumentError, "#{x}x#{y} has no options!" if options.empty?
+    raise ArgumentError, "#{@x}x#{@y} has no options!" if options.empty?
 
     @entropy = options.size
     @collapsed = @entropy == 1
@@ -31,4 +31,3 @@ class Cell
     self.options = [@options.sample]
   end
 end
-
