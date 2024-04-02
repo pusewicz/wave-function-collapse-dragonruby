@@ -29,7 +29,7 @@ class Cell
   end
 
   def to_s
-    "Cell #{@x}x#{@y} collapsed: #{@collapsed}, entropy: #{@entropy}, name: #{@name}"
+    "Cell #{@x}x#{@y} collapsed: #{@collapsed}, entropy: #{@entropy}, tile: #{name}"
   end
 
   def options=(options)
