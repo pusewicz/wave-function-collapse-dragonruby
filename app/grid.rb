@@ -4,45 +4,67 @@ class Grid
   def initialize(width, height, options)
     @width = width
     @height = height
-    @options = options.freeze
     @grid = Array.new(@width) { |x| Array.new(@height) { |y| Cell.new(x, y, options) } }
+    @flat = @grid.flatten
   end
 
-  def heuristic_pick
-    cells = @grid.flatten.sort { |a, b| a.entropy <=> b.entropy }.filter { |cell| cell.entropy > 1 }
+  def lowest_entropy_cells
+    cells = @flat.sort_by(&:entropy).filter { |cell| cell.entropy > 1 }
 
     return if cells.empty?
 
     initial = cells.first
-    cells.select { |cell| cell.entropy == initial.entropy }.sample
+    cells.select { |cell| cell.entropy == initial.entropy }
+  end
+
+  def propagate(cell)
+    x = cell.x
+    y = cell.y
+
+    y_succ = y + 1
+    unless y_succ == @height
+      cell_above = @grid[x][y_succ]
+      cell.options &= cell_above.options.map(&:down).flatten
+      cell_above.options &= cell.options.map(&:up).flatten
+    end
+
+    x_succ = x + 1
+    unless x_succ == @width
+      cell_right = @grid[x_succ][y]
+      cell.options &= cell_right.options.map(&:left).flatten
+      cell_right.options &= cell.options.map(&:right).flatten
+    end
+
+    y_pred = y - 1
+    unless y_pred.negative?
+      cell_below = @grid[x][y_pred]
+      cell.options &= cell_below.options.map(&:up).flatten
+      cell_below.options &= cell.options.map(&:down).flatten
+    end
+
+    x_pred = x - 1
+    return if x_pred.negative?
+
+    cell_left = @grid[x_pred][y]
+    cell.options &= cell_left.options.map(&:right).flatten
+    cell_left.options &= cell.options.map(&:left).flatten
   end
 
   def collapse
-    pick = heuristic_pick 
-    return false unless pick
+    cells = lowest_entropy_cells
+    return unless cells
+
+    pick = cells.sample
+    return unless pick
+
     pick.observe
 
-    @grid.each do |col|
-      col.each do |cell|
-        next if cell.collapsed
-
-        x = cell.x
-        y = cell.y
-
-        x_succ = x.succ
-        y_succ = y.succ
-        x_pred = (x - 1)
-        y_pred = (y - 1)
-
-        next if x_pred.negative? || y_pred.negative? || x_succ >= @width || y_succ >= @height
-
-        cell_above_options = @grid[x][y_succ].options.map(&:down)
-        cell_right_options = @grid[x_succ][y].options.map(&:left)
-        cell_below_options = @grid[x][y_pred].options.map(&:up)
-        cell_left_options = @grid[x_pred][y].options.map(&:right)
-
-        cell.options &= cell_above_options.flatten & cell_right_options.flatten & cell_below_options.flatten & cell_left_options.flatten
-      end
+    idx = 0
+    while idx < cells.size
+      propagate(cells[idx])
+      idx += 1
     end
+
+    @flat.delete(pick)
   end
 end
