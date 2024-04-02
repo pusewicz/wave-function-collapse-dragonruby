@@ -1,19 +1,14 @@
 class Cell
-  attr_reader :x, :y, :options, :collapsed
+  attr_reader :entropy, :x, :y, :options, :collapsed
 
   def initialize(x, y, options)
     @x = x
     @y = y
-    @options = options
-    @collapsed = false
+    self.options = options
   end
 
   def name
     @options.first.name if @collapsed
-  end
-
-  def entropy
-    @options.size
   end
 
   def inspect
@@ -26,7 +21,9 @@ class Cell
 
   def options=(options)
     raise ArgumentError, "#{x}x#{y} has no options!" if options.empty?
-    @collapsed = options.size == 1
+
+    @entropy = options.size
+    @collapsed = @entropy == 1
     @options = options
   end
 
