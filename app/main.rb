@@ -24,7 +24,7 @@ def tick(args)
   else
     args.outputs.debug << "FPS: #{args.gtk.current_framerate.to_sf}"
     args.state.paused = !args.state.paused if args.inputs.keyboard.key_down.space
-    args.state.start_time ||= Time.now
+    args.state.start_time ||= Time.now unless args.state.paused
 
     tiles = []
     borders = []
