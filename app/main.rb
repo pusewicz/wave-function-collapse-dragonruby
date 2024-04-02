@@ -79,9 +79,17 @@ def tick(args)
     end
     args.outputs.debug << "Paused. Press SPACE to resume." if args.state.paused
     if !args.state.paused && !args.state.collapsed
-      time = Time.now
-      args.state.collapsed ||= !args.state.wave.collapse
-      args.outputs.debug << "Collapsed in #{(Time.now - time).to_sf} seconds."
+      time = Time.now.to_f
+      args.state.iterations.to_i.times do
+        args.state.collapsed ||= !args.state.wave.collapse
+      end
+      total_time = (Time.now.to_f - time) * 1000
+
+      args.outputs.debug << "Collapsed in #{total_time.to_sf} milliseconds @ #{args.state.iterations} iterations per tick."
+
+      if args.gtk.current_framerate > 30
+        args.state.iterations += 1
+      end
     end
   end
 end
