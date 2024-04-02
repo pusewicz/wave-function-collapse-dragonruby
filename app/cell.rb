@@ -41,6 +41,6 @@ class Cell
   end
 
   def observe
-    self.options = [@options.sample]
+    self.options = [@options.max_by { |t| rand**(1.0 / t.probability) }]
   end
 end

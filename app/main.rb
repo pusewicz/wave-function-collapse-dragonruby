@@ -6,8 +6,8 @@ require_relative "grid"
 def tick(args)
   if args.state.tick_count.zero?
     args.outputs.debug << "Initializing..."
-    args.state.options = Config::RULES.map do |name, edges|
-      Tile.new(name, edges)
+    args.state.options = Config::RULES.map do |name, opts|
+      Tile.new(name, opts[:edges], opts[:probability])
     end
 
     args.state.options.each do |tile|

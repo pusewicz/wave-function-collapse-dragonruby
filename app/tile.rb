@@ -1,14 +1,15 @@
 class Tile
   attr_accessor :edges
-  attr_reader :up, :right, :down, :left, :name
+  attr_reader :up, :right, :down, :left, :name, :probability
 
-  def initialize(name, edges)
+  def initialize(name, edges, probability = 1.0)
     @name = name
     @edges = edges
     @up = []
     @right = []
     @down = []
     @left = []
+    @probability = probability
   end
 
   def rules=(tiles)
