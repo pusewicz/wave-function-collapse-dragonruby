@@ -1,4 +1,4 @@
-# Wave Function Collapse in Ruby
+# Wave Function Collapse in DragonRuby
 
 This repository is an example implementation of the [Wave Function Collapse](https://github.com/mxgmn/WaveFunctionCollapse) algorithm using [DragonRuby](https://dragonruby.org/toolkit/game).
 
