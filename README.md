@@ -8,7 +8,7 @@ The algorithm is used to generate the entire map using tiles based on the rules.
 
 ## Objective
 
-Build the Wave Function Collapse algorithm in Ruby that's fast enough to iterate in a game on each frame.
+Build the Wave Function Collapse algorithm in DragonRuby that's fast enough to iterate in a game on each frame.
 
 ## Contributing
 
