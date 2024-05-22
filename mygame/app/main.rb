@@ -44,18 +44,18 @@ def update(args)
   @map = @model.solve if @map.nil?
 
   if args.inputs.keyboard.key_down.r
-    GTK.notify! "Restarting..."
+    GTK.notify! "Restarting...", 40
     defaults
   elsif args.inputs.keyboard.key_down.a
     if @model.complete?
-      GTK.notify! "Adding empty row..."
+      GTK.notify! "Adding empty row...", 40
       @times = []
       @model.prepend_empty_row
     end
   elsif args.inputs.keyboard.key_down.p
     @paused = !@paused
   elsif args.inputs.keyboard.key_down.s
-    GTK.notify! "Solving..."
+    GTK.notify! "Solving...", 40
     @model.solve
   end
 
