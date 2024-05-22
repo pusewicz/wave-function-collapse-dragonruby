@@ -1,0 +1,7 @@
+samples/
+logs/*
+docs/
+dragonruby-publish
+ctags*
+tmp/
+mygame/*.tiled-session

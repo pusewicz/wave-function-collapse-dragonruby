@@ -1,0 +1,6 @@
+version=dev
+devid=pusewicz
+devtitle=Piotr Usewicz
+gameid=com.layer22.loop_ace
+gametitle=Wave Function Collapse in DragonRuby
+icon=metadata/icon.png
