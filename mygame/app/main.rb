@@ -102,7 +102,8 @@ def draw(args)
       x: WIDTH / 2,
       y: HEIGHT / 2,
       text: "Paused",
-    }
+      alignment_enum: 1,
+    }.merge(WHITE)
   end
 
   draw_labels(args)
