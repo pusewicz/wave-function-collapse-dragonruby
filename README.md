@@ -14,6 +14,10 @@ Build the Wave Function Collapse algorithm in Ruby that's fast enough to iterate
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/pusewicz/wave-function-collapse-dragonruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/pusewicz/wave-function-collapse-ruby/blob/main/CODE_OF_CONDUCT.md).
 
+## Others
+
+- [Wave Function Collapse in Ruby](https://github.com/pusewicz/wave-function-collapse-ruby)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
