@@ -6,6 +6,10 @@ The algorithm is used to generate the entire map using tiles based on the rules.
 
 ![Wave Function Collapse in DragonRuby](mygame/assets/screenshot.png)
 
+## Live Demo
+
+Because DragonRuby allows building an HTML game, you can test the implementation yourself at https://pusewicz.github.io/wave-function-collapse-dragonruby/.
+
 ## Objective
 
 Build the Wave Function Collapse algorithm in DragonRuby that's fast enough to iterate in a game on each frame.
