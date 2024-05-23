@@ -5,3 +5,6 @@ dragonruby-publish
 ctags*
 tmp/
 mygame/*.tiled-session
+.dragonruby
+builds/*
+!builds/com.layer22.wfc-html5-dev
