@@ -8,7 +8,7 @@ The algorithm is used to generate the entire map using tiles based on the rules.
 
 ## Live Demo
 
-Because DragonRuby allows building an HTML game, you can test the implementation yourself at https://pusewicz.github.io/wave-function-collapse-dragonruby/.
+Because DragonRuby allows building an HTML game, you can test the implementation yourself at https://pusewicz.github.io/wave-function-collapse-dragonruby/. HTML version is slower compared to a native build.
 
 ## Objective
 
